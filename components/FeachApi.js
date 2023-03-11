@@ -7,15 +7,17 @@ export default function FeachAPI() {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then((response) => response.json())
 			.then((json) => {
-				console.log(json)
 				setUser(json);
+
 			})
 	}
+
+
 	return <>
-		<div>
+		<div className='table-block'>
 			<button onClick={getApi}>Запросить пользователей</button>
 			<div>
-				<table>
+				<table className='table'>
 					<thead>
 						<tr>
 							<th>Name</th>
