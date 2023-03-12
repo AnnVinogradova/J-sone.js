@@ -4,17 +4,30 @@ import Table from './Table'
 export default function FeachAPI() {
 	const url = 'https://jsonplaceholder.typicode.com/users'
 
-	const [contactUsers, setcontactUsers] = useState([])
+	const [contactUsers, setContactUsers] = useState([]);
+	const [directionSort, setDirectionSort] = useState([]);
 
 	const sortUsers = (field) => {
-		console.log(field)
+		const newData = contactUsers.concat();
+
+		let sortUsers;
+
+		if (directionSort) {
+			sortUsers = newData.sort(
+				(a, b) => { return a[field] > b[field] ? 1 : -1 }
+			)
+		} sortUsers = newData.reverse(
+			(a, b) => { return a[field] > b[field] ? 1 : -1 }
+		)
+
+		setContactUsers(sortUsers);
+		setDirectionSort(!directionSort);
 	}
 	useEffect(() => {
 		axios.get(url)
 			.then(
 				(res) => {
-					console.log(res)
-					setcontactUsers(res.data)
+					setContactUsers(res.data)
 				}
 			)
 	}, [])

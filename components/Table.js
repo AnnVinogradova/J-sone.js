@@ -6,7 +6,7 @@ export default function Table({sortUsers, contactUsers}) {
 			<table className='table'>
 				<thead>
 					<tr>
-						<th onClick={() => { sortUsers('id') }}>id</th>
+						<th onClick={() => { sortUsers('id') }}>Id</th>
 						<th onClick={() => { sortUsers('username') }}>Name</th>
 						<th onClick={() => { sortUsers('email') }}>Email</th>
 						<th onClick={() => { sortUsers('address.city') }}>Address</th>
