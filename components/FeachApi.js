@@ -1,45 +1,28 @@
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import Table from './Table'
 export default function FeachAPI() {
-	const [user, setUser] = useState([])
+	const url = 'https://jsonplaceholder.typicode.com/users'
 
-	const getApi = () => {
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then((response) => response.json())
-			.then((json) => {
-				setUser(json);
-			})
+	const [contactUsers, setcontactUsers] = useState([])
+
+	const sortUsers = (field) => {
+		console.log(field)
 	}
+	useEffect(() => {
+		axios.get(url)
+			.then(
+				(res) => {
+					console.log(res)
+					setcontactUsers(res.data)
+				}
+			)
+	}, [])
 
 	return <>
 		<div className='table-block'>
-			<button onClick={getApi}>Запросить пользователей</button>
-			<div>
-				<table className='table'>
-					<thead>
-						<tr>
-							<th onClick={() => { sortUser(username) }}>Name</th>
-							<th onClick={() => { sortUser(email) }}>Email</th>
-							<th onClick={() => { sortUser(address.city) }}>Address</th>
-							<th onClick={() => { sortUser(phone) }}>Phone</th>
-							<th onClick={() => { sortUser(website) }}>Website</th>
-							<th onClick={() => { sortUser(company.name) }}>Company.name</th>
-						</tr>
-					</thead>
-					<tbody>
-						{user.map((item) => (
-							<tr key={item.id + Math.floor((Math.random() * 999999))}>
-								<th>{item.username}</th>
-								<th>{item.email}</th>
-								<th>{item.address.city}</th>
-								<th>{item.phone}</th>
-								<th>{item.website}</th>
-								<th>{item.company.name}</th>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
+			<Table contactUsers={contactUsers} sortUsers={sortUsers} />
 		</div>
 	</>
 }
+
